@@ -1,0 +1,37 @@
+yq e '.nodes[1].extraMounts[1].hostPath = env(LOCAL_DAGS_FOLDER)' -i kind-cluster.yaml
+yq e '.nodes[1].extraMounts[1].containerPath = "/tmp/dags"' -i kind-cluster.yaml
+yq e '.nodes[2].extraMounts[1].hostPath = env(LOCAL_DAGS_FOLDER)' -i kind-cluster.yaml
+yq e '.nodes[2].extraMounts[1].containerPath = "/tmp/dags"' -i kind-cluster.yaml
+yq e '.nodes[3].extraMounts[1].hostPath = env(LOCAL_DAGS_FOLDER)' -i kind-cluster.yaml
+yq e '.nodes[3].extraMounts[1].containerPath = "/tmp/dags"' -i kind-cluster.yaml
+
+
+postgresql:
+  enabled: true
+  persistence:
+    enabled: true
+  postgresqlDatabase: airflow
+  postgresqlHost: postgresql
+  postgresqlPort: 5432
+  postgresql:
+    auth:
+      postgresPassword: postgres
+
+
+postgresql:
+  auth:
+    postgresPassword: postgress
+
+
+https://medium.com/go-city/deploying-apache-airflow-on-kubernetes-for-local-development-8e958675585d
+
+https://github.com/gocityengineering/airflow-local-setup
+
+export LOCAL_DAGS_FOLDER=/home/airflow/dag
+
+
+docker rm -f $(docker ps -aq --filter "label=kind-cluster=<airflow-cluster>")
+
+CARE-217339.
+
+
